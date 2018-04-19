@@ -9,6 +9,7 @@ class StraksExplorer:
             if api_base == 'https://api.straks.info/v2/':
                 api_base = api_base.replace('https', 'http')
         self.api_base = api_base
+        self.cmc_base = 'https://api.coinmarketcap.com/v1/'
 
     """ Blockchain Data """
     def get_latest_block(self):
@@ -189,7 +190,6 @@ class StraksExplorer:
         """
         return requests.get(self.api_base + 'richlist?limit=%s'%(limit)).json()
 
-
     def get_masternodes(self, status, page, limit):
         """
         Fetch masternodes
@@ -232,3 +232,19 @@ class StraksExplorer:
         :return: transaction chart data
         """
         return requests.get(self.api_base + 'charts/transactions?days=%s'%(days)).json()
+
+    """ Price / Exchange Data """
+
+    def cmc_ticker(self, coin='STRAKS', currency='USD'):
+        """
+        Fetch current ticker of {coin} in the specified {currency} from coinmarketcap api
+
+        :param string currency: The currency code to return the results in
+        :apisource: api.coinmarketcap.com
+        :endpoint: /v1/ticker/straks/?convert={currency}
+        :return: ticker
+        """
+
+        return requests.get(self.cmc_base + 'ticker/%s/?convert=%s'%(coin, currency)).json()[0]
+
+

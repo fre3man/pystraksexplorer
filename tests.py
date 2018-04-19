@@ -1,6 +1,6 @@
 import unittest
 
-from pystraksexplorer import StraksExplorer
+from pystraksexplorer import StraksExplorer, StocksExchange
 
 
 class TestStraksExplorer(unittest.TestCase):
@@ -64,6 +64,28 @@ class TestStraksExplorer(unittest.TestCase):
 
     def test_get_transcation_chart(self):
         self.assertTrue(StraksExplorer().get_transaction_chart())
+
+
+class TestStocksExchange(unittest.TestCase):
+
+    def test_get_orderbook(self):
+        self.assertTrue(StocksExchange().get_orderbook())
+
+    def test_get_market_summary(self):
+        self.assertTrue(StocksExchange().get_market_summary().get('currency'))
+
+    def test_get_ticker(self):
+        self.assertTrue(StocksExchange().get_ticker().get('ask'))
+
+    def test_get_price(self):
+        self.assertTrue(StocksExchange().get_price().get('buy'))
+
+    def test_trade_history(self):
+        self.assertTrue(len(StocksExchange().get_market_summary()))
+
+    def test_get_grafic(self):
+        self.assertTrue(StocksExchange().get_grafic().get('pair'))
+
 
 
 if __name__ == '__main__':

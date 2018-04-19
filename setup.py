@@ -4,7 +4,7 @@ import sys, os
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 
-version = '0.98.9'
+version = '1.1.0'
 
 install_requires = [
     'requests',
